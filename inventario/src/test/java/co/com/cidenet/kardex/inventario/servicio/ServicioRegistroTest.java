@@ -73,6 +73,5 @@ public class ServicioRegistroTest {
 		when(repositorioRegistro.save(registroEntrada)).thenReturn(registroSalida);
 		Registro registroReal = servicioRegistro.registroMovimientoProducto(producto, 2, false);
 		assertThat(registroReal.getCantidad()).isEqualTo(producto.getCantidad());
-//		verify(repositorioRegistro).save(registroEntrada);
 	}
 }

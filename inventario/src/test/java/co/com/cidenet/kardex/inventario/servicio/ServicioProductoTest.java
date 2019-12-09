@@ -139,13 +139,6 @@ public class ServicioProductoTest {
 		assertEquals(0, registros.size());
 	}
 
-//	@Test
-//	public void registroProducto() {
-//
-////		Producto producto = guardarProducto(modeloBody);
-////		movimientoServicio.registroMovimientoProducto(producto, producto.getCantidad(), true);
-//	}
-
 	@Test
 	public void guardarProductoTest() {
 		ProductoRequestModel entrada = new ProductoRequestModel();
@@ -176,39 +169,6 @@ public class ServicioProductoTest {
 
 		when(repositorioProducto.save(productoGuardar)).thenReturn(salidaEsperada);
 		Producto salidaReal = servicioProducto.guardarProducto(entrada);
-//		List<Producto> productos = repositorioProducto.findAllByOrderById();
-//		List<Producto> productos = repositorioProducto.findAll();
-//		assertThat(productos).contains(salidaReal);
 		assertThat(salidaReal.getNombreProducto()).isEqualTo(productoGuardar.getNombreProducto());
-//		assertThat(salidaReal.getNombreProducto()).isEqualTo(entrada.getNombreProducto());
 	}
-
-//	@Autowired
-//	ServicioRegistro movimientoServicio;
-//
-
-//
-//
-//
-//	@Transactional
-//	public void registroProducto(Long idProducto, Integer cantidad) {
-//		Producto producto = actualizarCantidad(idProducto, cantidad);
-//		if (producto != null) {
-//			movimientoServicio.registroMovimientoProducto(producto, cantidad, false);
-//		}
-//	}
-//
-//	@Test
-//	public Producto actualizarCantidad(Long idProducto, Integer valorCambio) {
-//		Producto producto = repositorioProducto.findProductoById(idProducto);
-//		Integer cantidadActual = producto.getCantidad();
-//		Integer cantidadFinal = cantidadActual.intValue() + valorCambio.intValue();
-//		if (cantidadFinal.intValue() >= 0) {
-//			producto.setCantidad(cantidadFinal);
-//			repositorioProducto.save(producto);
-//		} else {
-//			producto = null;
-//		}
-//		return producto;
-//	}
 }
