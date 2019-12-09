@@ -16,8 +16,8 @@ public class ServicioRegistro {
 	@Autowired
 	RepositorioRegistro repositorioRegistro;
 
-	public Registro registroMovimientoProducto(Producto producto, Integer cantidad, Boolean esNuevo) {
-		Registro registro = new Registro();
+	public Registro registroMovimientoProducto(Producto producto, Integer cantidad, Boolean esNuevo,
+			Registro registro) {
 		registro.setProducto(producto);
 		registro.setIngresaProductoStock(UtilidadesInventario.esIngresoDeProductos(cantidad));
 		registro.setCantidad(cantidad);

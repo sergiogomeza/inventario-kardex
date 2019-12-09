@@ -27,7 +27,7 @@ import co.com.cidenet.kardex.inventario.servicio.ServicioProducto;
 public class ControladorProducto {
 	@Autowired
 	private ServicioProducto servicioProducto;
-	
+
 	@GetMapping
 	public @ResponseBody List<Producto> getInventario() {
 		return servicioProducto.getInventario();
@@ -44,13 +44,12 @@ public class ControladorProducto {
 	}
 
 	@PutMapping("/actualizar/{idProducto}/{cantidad}")
-	public ResponseEntity<String> actualizarProducto(@PathVariable Long idProducto,
-			@PathVariable Integer cantidad) {
+	public ResponseEntity<String> actualizarProducto(@PathVariable Long idProducto, @PathVariable Integer cantidad) {
 		try {
 			servicioProducto.registroProducto(idProducto, cantidad);
 			return new ResponseEntity<>(HttpStatus.OK);
-		}catch(ActualizacionException errorActualizando) {
-			return new ResponseEntity<>(errorActualizando.getMessage(),HttpStatus.BAD_REQUEST);
+		} catch (ActualizacionException errorActualizando) {
+			return new ResponseEntity<>(errorActualizando.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

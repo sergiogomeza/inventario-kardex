@@ -18,23 +18,23 @@ public class RepositorioRegistroTest {
 
 	@Autowired
 	private RepositorioRegistro repositorioRegistro;
-	
+
 	@Test
 	public void product_8_should_have_1_movement_registry() {
-		List<Registro> registros =	repositorioRegistro.findByProductoIdOrderByFechaHoraMovimientoDesc(8L);
+		List<Registro> registros = repositorioRegistro.findByProductoIdOrderByFechaHoraMovimientoDesc(8L);
 		assertThat(registros).hasSize(1);
 	}
-	
+
 	@Test
 	public void product_6_total_transaction_should_be_410000() {
-		List<Registro> registros =	repositorioRegistro.findByProductoIdOrderByFechaHoraMovimientoDesc(6L);
+		List<Registro> registros = repositorioRegistro.findByProductoIdOrderByFechaHoraMovimientoDesc(6L);
 		assertThat(registros.get(0).getPrecioTotalMovimiento().doubleValue()).isEqualTo(410000D);
 	}
-	
+
 	@Test
 	public void product_10_registry_should_add_10_items() {
-		List<Registro> registros =	repositorioRegistro.findByProductoIdOrderByFechaHoraMovimientoDesc(10L);
+		List<Registro> registros = repositorioRegistro.findByProductoIdOrderByFechaHoraMovimientoDesc(10L);
 		assertThat(registros.get(0).getCantidad().intValue()).isEqualTo(10);
 	}
-	
+
 }

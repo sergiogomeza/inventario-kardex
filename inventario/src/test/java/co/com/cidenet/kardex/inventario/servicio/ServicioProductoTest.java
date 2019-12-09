@@ -2,6 +2,7 @@ package co.com.cidenet.kardex.inventario.servicio;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -20,6 +21,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import co.com.cidenet.kardex.inventario.entidad.Producto;
 import co.com.cidenet.kardex.inventario.entidad.Registro;
+import co.com.cidenet.kardex.inventario.excepciones.ActualizacionException;
 import co.com.cidenet.kardex.inventario.repositorio.RepositorioProducto;
 import co.com.cidenet.kardex.inventario.repositorio.RepositorioRegistro;
 import co.com.cidenet.kardex.inventario.requestmodel.ProductoRequestModel;
@@ -144,6 +146,7 @@ public class ServicioProductoTest {
 		ProductoRequestModel entrada = new ProductoRequestModel();
 		Producto salidaEsperada = new Producto();
 		Producto productoGuardar = new Producto();
+		Producto producto = new Producto();
 
 		entrada.setNombreProducto("El caballero oscuro");
 		entrada.setTipoProducto("camiseta");
@@ -167,8 +170,49 @@ public class ServicioProductoTest {
 		productoGuardar.setCantidad(25);
 		productoGuardar.setDescripcion("Edición limitada");
 
-		when(repositorioProducto.save(productoGuardar)).thenReturn(salidaEsperada);
-		Producto salidaReal = servicioProducto.guardarProducto(entrada);
+		when(repositorioProducto.save(producto)).thenReturn(salidaEsperada);
+		Producto salidaReal = servicioProducto.guardarProducto(entrada, producto);
+		verify(repositorioProducto, times(1)).save(producto);
 		assertThat(salidaReal.getNombreProducto()).isEqualTo(productoGuardar.getNombreProducto());
+	}
+
+	@Test
+	public void actualizarCantidadTest() {
+		Producto productoSalida = new Producto();
+		Producto consultaById = new Producto();
+
+		productoSalida.setId(1L);
+		productoSalida.setNombreProducto("El caballero oscuro");
+		productoSalida.setTipoProducto("camiseta");
+		productoSalida.setPrecioProducto(20000D);
+		productoSalida.setCreadoComunidad(false);
+		productoSalida.setCantidad(25);
+		productoSalida.setDescripcion("Edición limitada");
+
+		consultaById.setId(1L);
+		consultaById.setNombreProducto("El caballero oscuro");
+		consultaById.setTipoProducto("camiseta");
+		consultaById.setPrecioProducto(20000D);
+		consultaById.setCreadoComunidad(false);
+		consultaById.setCantidad(25);
+		consultaById.setDescripcion("Edición limitada");
+
+		productoSalida.setId(1L);
+		productoSalida.setNombreProducto("El caballero oscuro");
+		productoSalida.setTipoProducto("camiseta");
+		productoSalida.setPrecioProducto(20000D);
+		productoSalida.setCreadoComunidad(false);
+		productoSalida.setCantidad(27);
+		productoSalida.setDescripcion("Edición limitada");
+
+		when(repositorioProducto.findProductoById(1L)).thenReturn(consultaById);
+		when(repositorioProducto.save(consultaById)).thenReturn(productoSalida);
+		try {
+			servicioProducto.actualizarCantidad(1L, 2);
+			verify(repositorioProducto, times(1)).findProductoById(1L);
+			verify(repositorioProducto, times(1)).save(consultaById);
+		} catch (ActualizacionException e) {
+			e.printStackTrace();
+		}
 	}
 }

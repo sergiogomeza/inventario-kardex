@@ -37,15 +37,18 @@ public class ServicioProducto {
 
 	@Transactional
 	public void registroProducto(ProductoRequestModel modeloBody) {
-		Producto producto = guardarProducto(modeloBody);
-		movimientoServicio.registroMovimientoProducto(producto, producto.getCantidad(), true);
+		Producto productoBase = new Producto();
+		Registro registroBase = new Registro();
+		Producto producto = guardarProducto(modeloBody, productoBase);
+		movimientoServicio.registroMovimientoProducto(producto, producto.getCantidad(), true, registroBase);
 	}
 
 	@Transactional
 	public void registroProducto(Long idProducto, Integer cantidad) throws ActualizacionException {
+		Registro registroBase = new Registro();
 		Producto producto = actualizarCantidad(idProducto, cantidad);
 		if (producto != null) {
-			movimientoServicio.registroMovimientoProducto(producto, cantidad, false);
+			movimientoServicio.registroMovimientoProducto(producto, cantidad, false, registroBase);
 		}
 	}
 
@@ -62,8 +65,7 @@ public class ServicioProducto {
 		return producto;
 	}
 
-	public Producto guardarProducto(ProductoRequestModel modeloBody) {
-		Producto producto = new Producto();
+	public Producto guardarProducto(ProductoRequestModel modeloBody, Producto producto) {
 		producto.setNombreProducto(modeloBody.getNombreProducto());
 		producto.setTipoProducto(modeloBody.getTipoProducto());
 		producto.setPrecioProducto(modeloBody.getPrecioProducto());
