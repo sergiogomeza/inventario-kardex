@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProductoGet } from '../model/producto.model';
 import { RegistroMovimientos } from '../model/registro-movimientos.model';
-import { forkJoin } from 'rxjs';
-import { Router,ActivatedRoute } from '@angular/router';
 import { ProductosService } from '../services/productos.service';
 import { RegistrosService } from '../services/registros.service';
 import { ComunicationService } from '../services/comunication.service';
