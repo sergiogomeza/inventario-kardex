@@ -1,0 +1,45 @@
+<form>
+  <div class="form-group">
+      <div class="row">
+          <div class="col-sm-12">
+              <p-accordion (onOpen)="onProductoTabOpen($event)" [multiple]="false">
+                  <p-accordionTab *ngFor="let producto of productosInfo; let i = index">
+                  <p-header>
+                      <b>id:&nbsp;&nbsp;</b>{{producto.id}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <b>Nombre Producto:&nbsp;&nbsp;</b>{{producto.nombreProducto}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <b>Tipo Producto:&nbsp;&nbsp;</b>{{producto.tipoProducto}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <b>Precio Producto:&nbsp;&nbsp;</b>{{producto.precioProducto}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <b>Creado Comunidad:&nbsp;&nbsp;</b>{{producto.creadoComunidad}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <b>Cantidad:&nbsp;&nbsp;</b>{{producto.cantidad}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <b>Descripcion:&nbsp;&nbsp;</b>{{producto.descripcion}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                  </p-header>
+                  <ng-template pTemplate="content">
+                      <table class="table table-bordered table-hover table-responsive-sm">
+                      <thead align="center">
+                          <tr class="table-primary">
+                          <th>id</th>
+                          <th>Ingresa Producto Stock</th>
+                          <th>Cantidad</th>
+                          <th>Precio Total Movimiento</th>
+                          <th>Fecha y Hora Movimiento</th>
+                          <th>Observaciones</th>
+                          </tr>
+                      </thead>
+                      <tbody *ngFor="let registro of registrosInfo">
+                          <tr>
+                          <td>{{registro.id}}</td>
+                          <td>{{registro.ingresaProductoStock}}</td>
+                          <td>{{registro.cantidad}}</td>
+                          <td>{{registro.precioTotalMovimiento}}</td>
+                          <td>{{registro.fechaHoraMovimiento | date: 'yyyy-MM-dd hh:mm:ss' }}</td>
+                          <td>{{registro.observaciones}}</td>
+                          </tr>
+                      </tbody>
+                      </table>
+                  </ng-template>
+                  </p-accordionTab>
+              </p-accordion>
+          </div>
+      </div>
+  </div>
+</form>

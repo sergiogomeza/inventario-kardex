@@ -1,0 +1,6 @@
+<button mat-raised-button (click)="OnClickLista()">Ver lista</button>
+<button mat-raised-button (click)="OnClickEditar()">Modificar Inventario</button>
+<button mat-raised-button (click)="OnclickNuevo()">Agregar Producto</button>
+<app-lista-inventario *ngIf="listaVisible"></app-lista-inventario>
+<editar *ngIf="editarVisible"></editar>
+<nuevo-producto *ngIf="nuevoVisible"></nuevo-producto>

@@ -1,0 +1,20 @@
+<form >
+    <mat-form-field>
+        <input matInput placeholder="id Producto" type="number" required [(ngModel)]="id" name="idproducto">
+    </mat-form-field><br>
+    <mat-form-field>
+        <input matInput placeholder="Cantidad" type="number" required [(ngModel)]="cantidad" name = "cantidad">
+    </mat-form-field><br>
+    <mat-form-field>
+        <mat-label>Tipo Movimiento</mat-label>
+        <select matNativeControl required (change) = "cambioTipoMovimiento($event)">
+            <option value="ingreso">Ingreso</option>
+            <option value="retiro">Retiro</option>
+        </select>
+    </mat-form-field><br>
+    <button mat-raised-button (click)="actualizarInformacion()">Modificar Inventario</button><br>
+    <p *ngIf="mostrarMensaje">
+        {{valorEnvio}}
+    </p>
+</form>
+

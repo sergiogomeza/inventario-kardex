@@ -1,0 +1,25 @@
+<form>
+    <mat-form-field>
+        <input matInput placeholder="Nombre Producto" type="text" [(ngModel)]="nombreProducto" name="nombreprod" required>
+    </mat-form-field><br>
+    <mat-form-field>
+        <input matInput placeholder="Tipo Producto" type="text" [(ngModel)]="tipoProducto" name="tipoprod" required>
+    </mat-form-field><br>
+    <mat-form-field>
+        <input matInput placeholder="Precio del producto" type="number" [(ngModel)]="precioProducto" name="precio" required>
+    </mat-form-field><br>
+    <mat-form-field>
+        <mat-label>Creado por la comunidad?</mat-label>
+        <select matNativeControl required (change) = "cambioTipoMovimiento($event)">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+        </select>
+    </mat-form-field><br>
+    <mat-form-field>
+        <input matInput placeholder="Cantidad" type="number" [(ngModel)]="cantidad" name="cantidad" required>
+    </mat-form-field><br>
+    <mat-form-field>
+        <input matInput placeholder="Descripcion" type="text" [(ngModel)]="descripcion" name="descripcion" required>
+    </mat-form-field><br>
+    <button mat-raised-button (click)="agregarProducto()">Nuevo Producto</button>
+</form>
